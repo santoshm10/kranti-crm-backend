@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const validator = require("validator");
 const SalesAgent = require("../models/salesAgent.model");
 
@@ -55,3 +56,23 @@ exports.getAllAgent = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+// delete agent by id 
+exports.deleteAgent = async (req, res) => {
+  const {id} = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid Agent ID." });
+  }
+
+  try {
+    const agentDeleted = await SalesAgent.findByIdAndDelete(id)
+    if(!agentDeleted) {
+      res.status(404).json({ error: `Agent with ID '${id}' not found.` })
+    } else {
+      res.status(200).json({ message: "Lead deleted successfully." });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
