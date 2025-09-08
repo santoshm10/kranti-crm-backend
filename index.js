@@ -16,7 +16,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use(express.json());
 
-initializeDatabase();
+await initializeDatabase();
 
 app.use("/api/v1/", require("./routes/lead.routes"));
 app.use("/api/v1/", require("./routes/salesAgent.routes"));
