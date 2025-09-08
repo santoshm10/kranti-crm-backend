@@ -25,7 +25,7 @@ app.use("/api/v1/", require("./routes/report.routes"));
 app.use("/api/v1/", require("./routes/tag.routes"));
 
 app.get("/", (req, res) => {
-  res.status(200).json({ message: "🚀 Anvaya CRM API is live." });
+  res.status(200).json({ message: "🚀 Kranti CRM API is live." });
 });
 
 app.listen(PORT, () => {
